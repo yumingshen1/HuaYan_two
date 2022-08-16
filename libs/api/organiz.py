@@ -16,11 +16,18 @@ class OrganizApi(BaseAPI):
         print('总id:',self.top_parentID)
 
     def add(self,**kwargs):
-        pass
+        if "parent" not in kwargs:
+            kwargs['parent'] = self.top_parentID
+        return super(OrganizApi, self).add(**kwargs)
+        
 
     def update(self,id,**kwargs):
-        pass
+        if 'parent' not in kwargs:
+            kwargs['parent'] = self.top_parentID
+        return super(OrganizApi, self).update(id=id,**kwargs)
 
-
+    ## 全部删除，过滤总部门， 从子部门开始删除(倒着)，
     def delete_all_times(self):
-        pass
+        items = self.query()[1:]
+        for item in items[::-1]:
+            self.delete(item['_id'])
