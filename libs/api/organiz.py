@@ -8,6 +8,13 @@
 from  common.baseAPI import BaseAPI
 
 class OrganizApi(BaseAPI):
+    def __init__(self,cookies):
+        super(OrganizApi, self).__init__(cookies) #调用父类初始化
+        #获得总部门
+        orgList = self.query()
+        self.top_parentID = orgList[0]['_id']
+        print('总id:',self.top_parentID)
+
     def add(self,**kwargs):
         pass
 
