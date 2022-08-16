@@ -31,3 +31,4 @@ class OrganizApi(BaseAPI):
         items = self.query()[1:]
         for item in items[::-1]:
             self.delete(item['_id'])
+
