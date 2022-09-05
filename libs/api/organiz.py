@@ -32,3 +32,11 @@ class OrganizApi(BaseAPI):
         for item in items[::-1]:
             self.delete(item['_id'])
 
+
+if __name__ == '__main__':
+    from libs.api.login import LoginApi
+    login_cookies = LoginApi().login(username='807145107@qq.com',password='123456',getcookies=True)
+    org_list = OrganizApi(login_cookies).add(name='测试部门')
+    print('增加后的部门列表第一个部门：',org_list)
+
+
